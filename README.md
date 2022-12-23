@@ -1,6 +1,6 @@
 # MediaPipe를 활용한 실시간 트래킹 운동 어시스턴트
 
-# Real Time Tracking Workout assitent with MediaPipe
+# Real Time Tracking Workout assitant with MediaPipe
 
 
 
