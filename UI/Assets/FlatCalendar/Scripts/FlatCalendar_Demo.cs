@@ -31,24 +31,6 @@ public class FlatCalendar_Demo : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		// Get Flat Calendar Instance
-		flatCalendar = GameObject.Find("FlatCalendar").GetComponent<FlatCalendar>();
-
-		// Initialize Flat Calendar
-		flatCalendar.initFlatCalendar();
-
-		// Install Demo Event List
-		flatCalendar.installDemoData();
-
-		// Add Events Callbacks
-		flatCalendar.setCallback_OnDaySelected(dayUpdated);
-		flatCalendar.setCallback_OnMonthChanged(monthUpdated);
-		flatCalendar.setCallback_OnEventSelected(eventsDiscovered);
-		flatCalendar.setCallback_OnNowday(backHome);
-
-		// Set UI Style
-		flatCalendar.setUIStyle(0);
-
 	}
 
 	
