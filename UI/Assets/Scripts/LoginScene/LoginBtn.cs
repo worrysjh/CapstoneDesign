@@ -26,7 +26,8 @@ public class LoginBtn : MonoBehaviour
         
         // 로그인 함수 호출 부분...
        
-
+        Debug.Log("ID : " + IDInput.text);
+        Debug.Log("PW : " + PWInput.text); 
         SceneManager.LoadScene("Nazakt");
     }
 

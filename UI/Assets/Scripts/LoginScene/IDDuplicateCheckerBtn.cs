@@ -29,7 +29,7 @@ public class IDDuplicateCheckerBtn : MonoBehaviour
     public void IDDuplicateCheckerBtnOnClicked(TMP_InputField ip){
         //입력 필드값 가져오기...
         UserId = ip.text;
-        Debug.Log(ip.text);
+        Debug.Log("중복 확인 ID : " + ip.text);
         
         // IDDuplicateTxt(중복 확인 텍스트) 정보 불러오기...
         GameObject IDDuplicateTxt = GameObject.Find("IDDuplicateTxt");
@@ -39,12 +39,10 @@ public class IDDuplicateCheckerBtn : MonoBehaviour
         if(UserId == "aaa"){
             AvailabilityTxt.color = new Color32(255, 0, 0, 255);
             AvailabilityTxt.text = "사용 불가";
-            Debug.Log(AvailabilityTxt.text);
         }
         else{
             AvailabilityTxt.color = new Color32(0, 0, 255, 255);
             AvailabilityTxt.text = "사용 가능";
-            Debug.Log(AvailabilityTxt.text);
         }
     }
 }

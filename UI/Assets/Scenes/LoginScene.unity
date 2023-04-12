@@ -3312,6 +3312,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03edd79c5a5484aa9916e6dfdca92267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IDInput: {fileID: 919472796}
+  PWInput: {fileID: 480891995}
 --- !u!1 &971359426
 GameObject:
   m_ObjectHideFlags: 0
@@ -4822,6 +4824,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b75383657ca4b549133a3a919b0ba2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IDInput: {fileID: 559291784}
+  PWInput: {fileID: 704904903}
 --- !u!1 &1645596872
 GameObject:
   m_ObjectHideFlags: 0
