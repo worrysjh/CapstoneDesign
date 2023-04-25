@@ -14,8 +14,9 @@ public class LoginBtn : MonoBehaviour
 {
     public TMP_InputField IDInput;
     public TMP_InputField PWInput;
+    public GameObject LoginFail;
 
-    public static MySqlConnection conn = new MySqlConnection("");
+    public static MySqlConnection conn = new MySqlConnection("SERVER = 221.140.207.231; port = 3306; DATABASE = capstone; UID = tester; PWD = P@ssw0rd;");
 
     void Start()
     {
@@ -34,19 +35,27 @@ public class LoginBtn : MonoBehaviour
 
     public void sceneChange(){
         string loginquery = "select * from user_tb where user_id = '" + IDInput.text + "'&& user_pw = '" + PWInput.text + "';";
+        //string loginquery = "select * from user_tb where user_id = @id and user_pw = @pw";
+        
+
+        
         int count = 0;
 
         try
         {
             MySqlCommand cmd = new MySqlCommand(loginquery, conn);
+        //    cmd.Parameters.AddWithValue("@id", IDInput.text);
+        //    cmd.Parameters.AddWithValue("@pw", PWInput.text);
             cmd.CommandText = loginquery;
-            MySqlDataReader drd = cmd.ExecuteReader();
+            
 
             Debug.Log(loginquery);
 
-            while (drd.Read())
-            {
-                count = count + 1;
+            using(MySqlDataReader drd = cmd.ExecuteReader()){
+                while (drd.Read())
+                {
+                    count = count + 1;
+                }
             }
 
             Debug.Log(count);
@@ -55,20 +64,24 @@ public class LoginBtn : MonoBehaviour
             {
                 Debug.Log("ID : " + IDInput.text);
                 Debug.Log("PW : " + PWInput.text);
+
+                UserInfo.id = IDInput.text;
+
                 SceneManager.LoadScene("Nazakt");
                 conn.Close();
             }
             else
-            {
+            {   
                 Debug.Log("Fail to login!");
+
+                LoginFail.SetActive(true);
             }
         }
         catch (Exception ex)
         {
+            Debug.Log(ex.ToString());
             Console.WriteLine(ex.ToString());
         }
-
-        
         Debug.Log(string.Format("conncetion is '{0}'", conn.State));
        // Debug.Log(loginquery);
     }

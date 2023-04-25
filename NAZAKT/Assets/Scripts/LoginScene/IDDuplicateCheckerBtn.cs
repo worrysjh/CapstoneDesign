@@ -8,17 +8,15 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System;
-using UnityEngine.SceneManagement;
-using UnityEngine.Windows;
+
 
 public class IDDuplicateCheckerBtn : MonoBehaviour
 {
     string UserId = null;                        // 사용자가 입력한 ID
     TextMeshProUGUI AvailabilityTxt = null;      // 사용 가능 여부 TXT
 
-    //DB 연결
-    public static MySqlConnection conn = new MySqlConnection("");
-    
+    public static MySqlConnection conn = new MySqlConnection("SERVER = 221.140.207.231; port = 3306; DATABASE = capstone; UID = tester; PWD = P@ssw0rd;");
+
 
     public void IDDuplicateCheckerBtnOnClicked(TMP_InputField ip){
         //입력 필드값 가져오기...
@@ -29,40 +27,43 @@ public class IDDuplicateCheckerBtn : MonoBehaviour
         GameObject IDDuplicateTxt = GameObject.Find("IDDuplicateTxt");
         AvailabilityTxt = IDDuplicateTxt.GetComponent<TextMeshProUGUI>();
 
-        string checkidquery = "select count(*) from user_tb where user_id = '" + UserId + "';";
+        string idcheckquery = "select * from user_tb where user_id = '" + UserId + "';";
         int count = 0;
 
         try
         {
-            MySqlCommand cmd = new MySqlCommand(checkidquery, conn);
-            cmd.CommandText = checkidquery;
-            MySqlDataReader drd = cmd.ExecuteReader();
+            conn.Open();
+            Debug.Log(idcheckquery);
+            MySqlCommand cmd = new MySqlCommand(idcheckquery, conn);
+            cmd.CommandText = idcheckquery;
+            MySqlDataReader drd;
 
-            Debug.Log(checkidquery);
+            Debug.Log(string.Format("conncetion is '{0}'", conn.State));
 
-            while (drd.Read())
-            {
-                count = count + 1;
-            }
+            using (drd = cmd.ExecuteReader()) {
+                while (drd.Read())
+                {
+                    count = count + 1;
+                }
 
-            if (count != 1)
-            {
-                
-                //이미 존재하는 아이디
-                AvailabilityTxt.color = new Color32(255, 0, 0, 255);
-                AvailabilityTxt.text = "사용 불가";
-            }
-            else
-            {
-                //사용가능한 아이디
-                AvailabilityTxt.color = new Color32(0, 0, 255, 255);
-                AvailabilityTxt.text = "사용 가능";
+                Debug.Log(count);
+
+                if (count == 0)
+                {
+                    AvailabilityTxt.color = new Color32(0, 0, 255, 255);
+                    AvailabilityTxt.text = "사용 가능";
+                }
+                else
+                {
+                    AvailabilityTxt.color = new Color32(255, 0, 0, 255);
+                    AvailabilityTxt.text = "사용 불가";
+                }
+                conn.Close();
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.ToString());
+            Debug.Log(ex.ToString());
         }
-        conn.Close();
     }
 }

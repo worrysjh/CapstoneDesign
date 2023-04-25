@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -384,7 +384,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 450, y: 150}
-  m_SizeDelta: {x: 150, y: 150}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &495423509
 MonoBehaviour:
@@ -870,7 +870,8 @@ MonoBehaviour:
   m_text: "\uC885\uB8CC"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4f69a90741d6e4286b85741a9f55ef2a, type: 2}
-  m_sharedMaterial: {fileID: 7186269271440521904, guid: 4f69a90741d6e4286b85741a9f55ef2a, type: 2}
+  m_sharedMaterial: {fileID: 7186269271440521904, guid: 4f69a90741d6e4286b85741a9f55ef2a,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1006,7 +1007,8 @@ MonoBehaviour:
   m_text: "\uC2DC\uC791\uD558\uAE30"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4f69a90741d6e4286b85741a9f55ef2a, type: 2}
-  m_sharedMaterial: {fileID: 7186269271440521904, guid: 4f69a90741d6e4286b85741a9f55ef2a, type: 2}
+  m_sharedMaterial: {fileID: 7186269271440521904, guid: 4f69a90741d6e4286b85741a9f55ef2a,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1128,7 +1130,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -450, y: 150}
-  m_SizeDelta: {x: 150, y: 150}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1532029454
 MonoBehaviour:
@@ -1304,7 +1306,8 @@ MonoBehaviour:
   m_text: NAZAKT
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4f69a90741d6e4286b85741a9f55ef2a, type: 2}
-  m_sharedMaterial: {fileID: 7186269271440521904, guid: 4f69a90741d6e4286b85741a9f55ef2a, type: 2}
+  m_sharedMaterial: {fileID: 7186269271440521904, guid: 4f69a90741d6e4286b85741a9f55ef2a,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

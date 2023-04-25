@@ -8,53 +8,51 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System;
-using UnityEngine.SceneManagement;
 
 public class SignUpBtn : MonoBehaviour
 {
+    public static MySqlConnection conn = new MySqlConnection("SERVER = 221.140.207.231; port = 3306; DATABASE = capstone; UID = tester; PWD = P@ssw0rd;");
+
     public TMP_InputField IDInput;
     public TMP_InputField PWInput;
     public TMP_InputField PWcheckInput;
+    public TMP_InputField NameInput;
+    public TextMeshProUGUI PWDuplicationChecker;
+    public TextMeshProUGUI IDDuplicateTxt;
+    
+    public void signUpBtnOnClicked(){
+        // 오브젝트 가져오기
+        TextMeshProUGUI SignUpSucTxt = GameObject.Find("SignUpSucTxt").GetComponent<TextMeshProUGUI>();
+        string signupquery = "insert into user_tb (user_id, user_pw, user_nm) value ('" + IDInput.text + "', '" + PWInput.text + "', '" + NameInput.text +"');";
 
-    public static MySqlConnection conn = new MySqlConnection("");
-
-    public void signUpBtnOnClicked(){     
-        
-        string signupquery = "insert into user_tb (user_id, user_pw) value ('" + IDInput.text + "', '" + PWInput.text + "');";
-
-        if (IDInput.text == "" ||  PWInput.text == "")
+        if(PWDuplicationChecker.text == "비밀 번호 같음" && IDDuplicateTxt.text == "사용 가능" && NameInput.text != "")
         {
-            Debug.Log("there are some empty space!");
+            try
+            {
+                conn.Open();
+                Debug.Log(signupquery);
+                MySqlCommand cmd = new MySqlCommand(signupquery, conn);
+                cmd.ExecuteNonQuery();
+                SignUpSucTxt.text = "회원 가입 성공";
+                conn.Close();
+                
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(ex.ToString());
+            }
         }
         else
         {
-            if (PWInput.text != PWcheckInput.text)
-            {
-                Debug.Log("password doesn't match!");
-            }
-            else
-            {
-                Debug.Log("ID : " + IDInput.text);
-                Debug.Log("PW : " + PWInput.text);
-
-                try
-                {
-                    conn.Open();
-                    MySqlCommand cmd = new MySqlCommand(signupquery, conn);
-                    cmd.CommandText = signupquery;
-                    cmd.ExecuteNonQuery();
-
-                    Debug.Log(signupquery);
-                    Debug.Log("success SignUp!");
-                    //action 코드 필요(로그인 화면으로 전환)
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.ToString());
-                }
-
-                conn.Close();
-            }   
+            SignUpSucTxt.text = "회원 가입 실패";   
         }
+
+        // 데이터 초기화...
+        IDInput.text = "";
+        PWInput.text = "";
+        PWcheckInput.text = "";
+        NameInput.text = "";
+        PWDuplicationChecker.text = "";
+        IDDuplicateTxt.text = "";
     }
 }
