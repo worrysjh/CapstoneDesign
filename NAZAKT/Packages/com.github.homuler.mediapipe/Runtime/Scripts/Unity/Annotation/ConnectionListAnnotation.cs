@@ -16,8 +16,10 @@ namespace Mediapipe.Unity
 
   public sealed class ConnectionListAnnotation : ListAnnotation<ConnectionAnnotation>
   {
-    [SerializeField] private Color _color = Color.red;
+    [SerializeField] private Color _color = Color.white;
     [SerializeField, Range(0, 1)] private float _lineWidth = 1.0f;
+    public List<int> wrongNumbers = new List<int> { 15, 16 };
+
 
 #if UNITY_EDITOR
     private void OnValidate()
@@ -57,9 +59,16 @@ namespace Mediapipe.Unity
 
     public void Redraw()
     {
+      int cnt = 0;
       foreach (var connection in children)
       {
-        if (connection != null) { connection.Redraw(); }
+        if (wrongNumbers.Contains(cnt)){
+          if (connection != null) { connection.SetColor(Color.red); connection.Redraw(); }
+        }
+        else {
+          if (connection != null) { connection.SetColor(Color.white); connection.Redraw(); }
+        } 
+        cnt++;
       }
     }
 
