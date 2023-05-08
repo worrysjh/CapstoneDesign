@@ -12,13 +12,16 @@ namespace Mediapipe.Unity
         [SerializeField] private GameObject connectionListAnnotation1;
         [SerializeField] private GameObject connectionListAnnotation2;
         private float time;
-
         public LandmarkList target;
+        private ConnectionListAnnotation connectionList1;
+        private ConnectionListAnnotation connectionList2;
 
         // Start is called before the first frame update
         void Start()
         {
             time = 1f;
+            connectionList1 = connectionListAnnotation1.GetComponent<ConnectionListAnnotation>();
+            connectionList2 = connectionListAnnotation2.GetComponent<ConnectionListAnnotation>();
         }
 
         // Update is called once per frame
@@ -32,64 +35,42 @@ namespace Mediapipe.Unity
             }
         }
 
-        void print()
-        {
-            Debug.Log("test!");
+        //Get Vector3 by Landmark number
+        Vector3 getVector(int num){
+            Vector3 vector = new Vector3((target?.Landmark)[num].X, (target?.Landmark)[num].Y, (target?.Landmark)[num].Z);
+            return vector;
+        }
+
+        // Calculate angle with Landmark datas
+        // num3 = -1 일 때엔 y축과 각도를 계산함
+        float calcAngle(int num1, int num2, int num3){
+            Vector3 VA, VB;
+            if (num3 == -1){
+                VA = getVector(num1) - getVector(num2);
+                VB = new Vector3(0, -0.1f, 0);
+            } else{
+                VA = getVector(num1) - getVector(num2);
+                VB = getVector(num3) - getVector(num2);
+            }
+            float angle = Vector3.Angle(VA, VB);
+            return angle;
+        }
+
+        void print(){
             if (target != null)
             {
-                // Landmark landmark = JsonUtility.FromJson<Landmark>(target?.Landmark.ToString());
-                // Debug.Log((target?.Landmark)[12].X);
-                // 1 : (target?.Landmark)[12].
-                // 2 : (target?.Landmark)[14].
-                // 3 : (target?.Landmark)[16].
-                // Vector3 v1 = new Vector3((target?.Landmark)[14].X - (target?.Landmark)[12].X, (target?.Landmark)[14].Y - (target?.Landmark)[12].Y, (target?.Landmark)[14].Z - (target?.Landmark)[12].Z) * 10.0f;
-                // Vector3 v2 = new Vector3((target?.Landmark)[16].X - (target?.Landmark)[12].X, (target?.Landmark)[16].Y - (target?.Landmark)[12].Y, (target?.Landmark)[16].Z - (target?.Landmark)[12].Z) * 10.0f;
-                // Vector3 v3 = new Vector3((target?.Landmark)[16].X - (target?.Landmark)[14].X, (target?.Landmark)[16].Y - (target?.Landmark)[14].Y, (target?.Landmark)[16].Z - (target?.Landmark)[14].Z) * 10.0f;
-                // float angle = Vector3.Angle(v1, v2);
-                // float angleInDegrees = angle * (180f / Mathf.PI);
-
-                // Vector3 v1 = new Vector3((target?.Landmark)[14].X - (target?.Landmark)[12].X, (target?.Landmark)[14].Y - (target?.Landmark)[12].Y, (target?.Landmark)[14].Z - (target?.Landmark)[12].Z);
-                // Vector3 v2 = new Vector3((target?.Landmark)[16].X - (target?.Landmark)[14].X, (target?.Landmark)[16].Y - (target?.Landmark)[14].Y, (target?.Landmark)[16].Z - (target?.Landmark)[14].Z);
-
-                // Vector3 cross = Vector3.Cross(v1, v2);
-
-                
-                //float angle = Mathf.Acos(Vector3.Dot(v1.normalized, v2.normalized)) * Mathf.Rad2Deg;
-
-                // float angle = Mathf.Atan2((target?.Landmark)[14].Y - (target?.Landmark)[12].Y, (target?.Landmark)[14].X - (target?.Landmark)[12].X) * Mathf.Rad2Deg;
-
-                Vector3 v1 = new Vector3((target?.Landmark)[12].X, (target?.Landmark)[12].Y, (target?.Landmark)[12].Z);
-                Vector3 v2 = new Vector3((target?.Landmark)[14].X, (target?.Landmark)[14].Y, (target?.Landmark)[14].Z);
-                Vector3 v3 = new Vector3((target?.Landmark)[16].X, (target?.Landmark)[16].Y, (target?.Landmark)[16].Z);
-
-                Vector3 VA = v1 - v2;
-                Vector3 VB = v3 - v2;
-
-                float angle = Vector3.Angle(VA, VB);
-                Debug.Log(angle);
-                ScriptTxt.GetComponent<Text>().text = angle.ToString();
-
-                ConnectionListAnnotation connectionList1 = connectionListAnnotation1.GetComponent<ConnectionListAnnotation>();
-                ConnectionListAnnotation connectionList2 = connectionListAnnotation2.GetComponent<ConnectionListAnnotation>();
-
-                if (angle > 160){
-                    if (!connectionList1.wrongNumbers.Contains(15)){
-                        connectionList1.wrongNumbers.Add(15);
-                        connectionList2.wrongNumbers.Add(15);
+                // left_knee_angle
+                float left_knee_angle = calcAngle(23, 25, -1);
+                ScriptTxt.GetComponent<Text>().text = left_knee_angle.ToString();
+                if (left_knee_angle > 30){
+                    if (!connectionList1.wrongNumbers.Contains(25)){
+                        connectionList1.wrongNumbers.Add(25);
+                        connectionList2.wrongNumbers.Add(25);
                     }
-                    if (!connectionList1.wrongNumbers.Contains(16)){
-                        connectionList1.wrongNumbers.Add(16);
-                        connectionList2.wrongNumbers.Add(16);
-                    }
-                }
-                else {
-                    if (connectionList1.wrongNumbers.Contains(15)){
-                        connectionList1.wrongNumbers.Remove(15);
-                        connectionList2.wrongNumbers.Remove(15);
-                    }
-                    if (connectionList1.wrongNumbers.Contains(16)){
-                        connectionList1.wrongNumbers.Remove(16);
-                        connectionList2.wrongNumbers.Remove(16);
+                } else {
+                    if (connectionList1.wrongNumbers.Contains(25)){
+                        connectionList1.wrongNumbers.Remove(25);
+                        connectionList2.wrongNumbers.Remove(25);
                     }
                 }
             }
