@@ -30,48 +30,60 @@ namespace Mediapipe.Unity
             if (time > 0)
                 time -= Time.deltaTime;
             else{
-                print();
+                CheckPose();
                 time = 0.1f;
             }
         }
 
         //Get Vector3 by Landmark number
-        Vector3 getVector(int num){
+        Vector3 GetVector(int num){
             Vector3 vector = new Vector3((target?.Landmark)[num].X, (target?.Landmark)[num].Y, (target?.Landmark)[num].Z);
             return vector;
         }
 
         // Calculate angle with Landmark datas
         // num3 = -1 일 때엔 y축과 각도를 계산함
-        float calcAngle(int num1, int num2, int num3){
+        float CalcAngle(int num1, int num2, int num3){
             Vector3 VA, VB;
             if (num3 == -1){
-                VA = getVector(num1) - getVector(num2);
+                VA = GetVector(num1) - GetVector(num2);
                 VB = new Vector3(0, -0.1f, 0);
             } else{
-                VA = getVector(num1) - getVector(num2);
-                VB = getVector(num3) - getVector(num2);
+                VA = GetVector(num1) - GetVector(num2);
+                VB = GetVector(num3) - GetVector(num2);
             }
             float angle = Vector3.Angle(VA, VB);
             return angle;
         }
 
-        void print(){
+        // num 번째 Connection의 색을 빨간색으로 변경함
+        void ChangeToRed(int num){
+            if (!this.connectionList1.wrongNumbers.Contains(num)){
+                this.connectionList1.wrongNumbers.Add(num);
+                this.connectionList2.wrongNumbers.Add(num);
+            }
+        }
+
+        // num 번째 Connection의 색을 흰색으로 변경함
+        void ChangeToWhite(int num){
+            if (this.connectionList1.wrongNumbers.Contains(num)){
+                this.connectionList1.wrongNumbers.Remove(num);
+                this.connectionList2.wrongNumbers.Remove(num);
+            }
+        }
+
+        void CheckPose(){
             if (target != null)
             {
                 // left_knee_angle
-                float left_knee_angle = calcAngle(23, 25, -1);
+                float left_knee_angle = CalcAngle(23, 25, -1);
+
                 ScriptTxt.GetComponent<Text>().text = left_knee_angle.ToString();
+
                 if (left_knee_angle > 30){
-                    if (!connectionList1.wrongNumbers.Contains(25)){
-                        connectionList1.wrongNumbers.Add(25);
-                        connectionList2.wrongNumbers.Add(25);
-                    }
+                    ChangeToRed(25);
                 } else {
-                    if (connectionList1.wrongNumbers.Contains(25)){
-                        connectionList1.wrongNumbers.Remove(25);
-                        connectionList2.wrongNumbers.Remove(25);
-                    }
+                    ChangeToWhite(25);
                 }
             }
         }
