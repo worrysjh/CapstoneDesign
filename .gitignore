@@ -506,6 +506,7 @@ crashlytics-build.properties
 /NAZAKT/ProjectSettings/
 /NAZAKT/test_BurstDebugInformation_DoNotShip/
 /NAZAKT/UserSettings/
+/NAZAKT/docker/
 
 /NAZAKT/.vscode/
 /NAZAKT/.vs/
