@@ -514,5 +514,13 @@ crashlytics-build.properties
 /NAZAKT/.github/
 /NAZAKT/.git/
 
+NAZAKT/.bazelrc
+NAZAKT/.bazelversion
+NAZAKT/.clang-format
+NAZAKT/.editorconfig
+NAZAKT/.gitattributes
+NAZAKT/.versionrc
+NAZAKT/.vsconfig
+
 # End of https://www.toptal.com/developers/gitignore/api/unity,csharp
 >>>>>>> fc9aec21a6d4e80ab1c9129c23b5593853cfee23
