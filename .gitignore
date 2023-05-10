@@ -42,6 +42,16 @@
 /NAZAKT/.versionrc
 /NAZAKT/.vsconfig
 
+/NAZAKT/CHANGELOG.md
+/NAZAKT/LICENSE
+/NAZAKT/README.md
+/NAZAKT/Third\ Party\ Notices.md
+/NAZAKT/WORKSPACE
+/NAZAKT/build.py
+/NAZAKT/issue-template-version-updater.js
+/NAZAKT/omnisharp.json
+/NAZAKT/packages.config
+
 # User-specific files
 *.rsuser
 *.suo
