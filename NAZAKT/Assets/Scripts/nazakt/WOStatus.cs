@@ -7,8 +7,7 @@ using TMPro;
 
 public class WOStatus : MonoBehaviour
 {
-    public GameObject woStatus;
-    
+    public string WOname;
     public int setNum;
     public int cntNum;
 }

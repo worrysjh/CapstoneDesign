@@ -23,7 +23,7 @@ public class SignUpBtn : MonoBehaviour
     public void signUpBtnOnClicked(){
         // 오브젝트 가져오기
         TextMeshProUGUI SignUpSucTxt = GameObject.Find("SignUpSucTxt").GetComponent<TextMeshProUGUI>();
-        string signupquery = "insert into user_tb (user_id, user_pw, user_nm) value ('" + IDInput.text + "', '" + PWInput.text + "', '" + NameInput.text +"');";
+        string signupquery = "insert into user_tb (user_id, user_pw, user_name) value ('" + IDInput.text + "', '" + PWInput.text + "', '" + NameInput.text +"');";
 
         if(PWDuplicationChecker.text == "비밀 번호 같음" && IDDuplicateTxt.text == "사용 가능" && NameInput.text != "")
         {

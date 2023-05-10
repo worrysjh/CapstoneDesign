@@ -18,7 +18,7 @@ namespace Mediapipe.Unity
   {
     [SerializeField] private Color _color = Color.white;
     [SerializeField, Range(0, 1)] private float _lineWidth = 1.0f;
-    public List<int> wrongNumbers = new List<int> { 15, 16 };
+    public List<int> wrongNumbers = new List<int>{};
 
 
 #if UNITY_EDITOR

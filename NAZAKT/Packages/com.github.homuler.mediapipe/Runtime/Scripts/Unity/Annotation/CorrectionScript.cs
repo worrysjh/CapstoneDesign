@@ -8,23 +8,25 @@ namespace Mediapipe.Unity
 {
     public class CorrectionScript : MonoBehaviour
     {
-        [SerializeField] public GameObject ScriptTxt;
+        [SerializeField] private GameObject woInfo;
         [SerializeField] private GameObject connectionListAnnotation1;
         [SerializeField] private GameObject connectionListAnnotation2;
         private float time;
         public LandmarkList target;
+        private WOInfo info;
         private ConnectionListAnnotation connectionList1;
         private ConnectionListAnnotation connectionList2;
-        private int currentState; // 현재의 운동 진행 상태(1, 2, 3)
-        private bool isSquattingDown; // 스쿼트 자세가 내려가고 있는 중인지, State3에 도달 시 False, State1에 도달 시 True로 전이
+        private int currentState; // ?????? ?? ???? ????(1, 2, 3)
+        private bool isSquattingDown; // ????? ????? ???????? ??? ??????, State3?? ???? ?? False, State1?? ???? ?? True?? ????
 
         // Start is called before the first frame update
         void Start()
         {
             time = 1f;
-            currentState = 1; // 운동 진행 상태 초기화
+            currentState = 1; // ?? ???? ???? ????
             connectionList1 = connectionListAnnotation1.GetComponent<ConnectionListAnnotation>();
             connectionList2 = connectionListAnnotation2.GetComponent<ConnectionListAnnotation>();
+            info = woInfo.GetComponent<WOInfo>();
         }
 
         // Update is called once per frame
@@ -45,7 +47,7 @@ namespace Mediapipe.Unity
         }
 
         // Calculate angle with Landmark datas
-        // num3 = -1 일 때엔 y축과 각도를 계산함
+        // num3 = -1 ?? ???? y??? ?????? ?????
         float CalcAngle(int num1, int num2, int num3){
             Vector3 VA, VB;
             if (num3 == -1){
@@ -59,7 +61,7 @@ namespace Mediapipe.Unity
             return angle;
         }
 
-        // num 번째 Connection의 색을 빨간색으로 변경함
+        // num ??占쏙옙 Connection?? ???? ?????????? ??????
         void ChangeToRed(int num){
             if (!this.connectionList1.wrongNumbers.Contains(num)){
                 this.connectionList1.wrongNumbers.Add(num);
@@ -67,7 +69,7 @@ namespace Mediapipe.Unity
             }
         }
 
-        // num 번째 Connection의 색을 흰색으로 변경함
+        // num ??占쏙옙 Connection?? ???? ??????? ??????
         void ChangeToWhite(int num){
             if (this.connectionList1.wrongNumbers.Contains(num)){
                 this.connectionList1.wrongNumbers.Remove(num);
@@ -81,15 +83,15 @@ namespace Mediapipe.Unity
                 /*
                 States Overview
                 (0 ~ 32)
-                State s1:   If the angle between the knee and the vertical falls within 32°,
+                State s1:   If the angle between the knee and the vertical falls within 32??,
                             then it is in the Normal phase, and its state is s1. It is essentially the state
                             where the counters for proper and improper squats are updated.
                 (35 ~ 65)
-                State s2:   If the angle between the knee and the vertical falls between 35° and 65°,
+                State s2:   If the angle between the knee and the vertical falls between 35?? and 65??,
                             it is in the Transition phase and subsequently goes to state s2.
                 (75 ~ 95)
                 State s3:   If the angle between the knee and the vertical lies within a specific range
-                            (say, between 75° and 95°), it is in the Pass phase and subsequently goes to state s3.
+                            (say, between 75?? and 95??), it is in the Pass phase and subsequently goes to state s3.
                 */
                 
                 /*
@@ -106,47 +108,50 @@ namespace Mediapipe.Unity
                     case 1:
                         left_knee_angle = CalcAngle(23, 25, -1); // Calculate left_knee_angle (vertical)
                         right_knee_angle = CalcAngle(24, 26, -1); // Calculate right_knee_angle (vertical)
-                        ScriptTxt.GetComponent<Text>().text = currentState.ToString();
+                        info.currentState = 1;
 
                         // State1 -> State2
-                        if (!isSquattingDown){ // State3까지 내려온 후 다시 case에 도달한 경우
+                        if (!isSquattingDown){ // State3???? ?????? ?? ??? case?? ?????? ???
                             // Correct Count up
                             isSquattingDown = true;
                         }
 
                         if ((35 < left_knee_angle && left_knee_angle < 65) &&  (35 < right_knee_angle && right_knee_angle < 65)){
                             currentState = 2;
+                            info.SetState(currentState);
                         }
                         break;
 
                     case 2:
                         left_knee_angle = CalcAngle(23, 25, -1); // Calculate left_knee_angle (vertical)
                         right_knee_angle = CalcAngle(24, 26, -1); // Calculate right_knee_angle (vertical)
-                        ScriptTxt.GetComponent<Text>().text = currentState.ToString();
                         
                         // State2 -> State1
-                        if ((left_knee_angle < 32) && (right_knee_angle < 32) && (!isSquattingDown)){ // State1로 전이
+                        if ((left_knee_angle < 32) && (right_knee_angle < 32) && (!isSquattingDown)){ // State1?? ????
                             currentState = 1;
+                            info.SetState(currentState);
                         } else if ((left_knee_angle < 32) && (right_knee_angle < 32) && (isSquattingDown)){
                             // Incorrect Count up : cyclic from state s1 to s2 and again s1
                             currentState = 1;
+                            info.SetState(currentState);
                         }
                         
                         // State2 -> State3
                         if ((75 < left_knee_angle && left_knee_angle < 95) && (75 < right_knee_angle && right_knee_angle < 95) && (isSquattingDown)){
                             currentState = 3;
+                            info.SetState(currentState);
                             isSquattingDown = false;
                         } else if ((75 < left_knee_angle && left_knee_angle < 95) && (75 < right_knee_angle && right_knee_angle < 95) && (!isSquattingDown)){
-                            // 올라가야 하는데 내려간 경우에 대한 조치
+                            // ???? ???? ?????? ??占쏙옙 ???? ???
                             currentState = 3;
+                            info.SetState(currentState);
                         }
                         break;
 
                     case 3:
                         left_knee_angle = CalcAngle(23, 25, -1); // Calculate left_knee_angle (vertical)
                         right_knee_angle = CalcAngle(24, 26, -1); // Calculate right_knee_angle (vertical)
-                        ScriptTxt.GetComponent<Text>().text = currentState.ToString();
-                        
+
                         // Too deep Squat
                         if ((95 < left_knee_angle) || (95 < right_knee_angle)){
                             // Print "Too Deep Squat" Message
@@ -157,6 +162,7 @@ namespace Mediapipe.Unity
                         if ((35 < left_knee_angle && left_knee_angle < 65) &&  (35 < right_knee_angle && right_knee_angle < 65)){
                             ChangeToWhite(30);
                             currentState = 2;
+                            info.SetState(currentState);
                         }
                         break;
                 }
