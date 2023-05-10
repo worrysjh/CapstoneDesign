@@ -18,12 +18,15 @@ namespace Mediapipe.Unity
         private ConnectionListAnnotation connectionList2;
         private int currentState; // ?????? ?? ???? ????(1, 2, 3)
         private bool isSquattingDown; // ????? ????? ???????? ??? ??????, State3?? ???? ?? False, State1?? ???? ?? True?? ????
+        private bool isDeepSquat; // Deep Squats Flag
 
         // Start is called before the first frame update
         void Start()
         {
             time = 1f;
             currentState = 1; // ?? ???? ???? ????
+            isSquattingDown = true;
+            isDeepSquat = false;
             connectionList1 = connectionListAnnotation1.GetComponent<ConnectionListAnnotation>();
             connectionList2 = connectionListAnnotation2.GetComponent<ConnectionListAnnotation>();
             info = woInfo.GetComponent<WOInfo>();
@@ -112,7 +115,14 @@ namespace Mediapipe.Unity
 
                         // State1 -> State2
                         if (!isSquattingDown){ // State3???? ?????? ?? ??? case?? ?????? ???
-                            // Correct Count up
+                            if (isDeepSquat){
+                                // Incorrect Count up
+                                info.increseIncorrectCount();
+                                isDeepSquat = false;
+                            } else {
+                                // Correct Count up
+                                info.increaseCorrectCount();
+                            }
                             isSquattingDown = true;
                         }
 
@@ -133,6 +143,7 @@ namespace Mediapipe.Unity
                         } else if ((left_knee_angle < 32) && (right_knee_angle < 32) && (isSquattingDown)){
                             // Incorrect Count up : cyclic from state s1 to s2 and again s1
                             currentState = 1;
+                            info.increseIncorrectCount();
                             info.SetState(currentState);
                         }
                         
@@ -155,12 +166,16 @@ namespace Mediapipe.Unity
                         // Too deep Squat
                         if ((95 < left_knee_angle) || (95 < right_knee_angle)){
                             // Print "Too Deep Squat" Message
+                            isDeepSquat = true;
+
                             ChangeToRed(30);
+                            ChangeToRed(25);
                         }
                         
                         // State3 -> State2
                         if ((35 < left_knee_angle && left_knee_angle < 65) &&  (35 < right_knee_angle && right_knee_angle < 65)){
                             ChangeToWhite(30);
+                            ChangeToWhite(25);
                             currentState = 2;
                             info.SetState(currentState);
                         }

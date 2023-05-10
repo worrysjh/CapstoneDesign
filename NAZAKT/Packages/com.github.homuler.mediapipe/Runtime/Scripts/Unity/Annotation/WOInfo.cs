@@ -16,9 +16,21 @@ public class WOInfo : MonoBehaviour
     public int currentState;
     public int inccorectPoseCount;
     public int[] ErrorTime;
+    public int correctCount;
+    public int incorrectCount;
 
     public void SetState(int state){
         currentState = state;
+    }
+
+    public void increaseCorrectCount(){
+        correctCount++;
+        Debug.Log("correctCount : " + correctCount.ToString());
+    }
+
+    public void increseIncorrectCount(){
+        incorrectCount++;
+        Debug.Log("incorrectCount : " + incorrectCount.ToString());
     }
 
     public void DecreaswErrorCount(){
@@ -52,6 +64,8 @@ public class WOInfo : MonoBehaviour
     {
         time = 1f;
         ErrorTime = new int[Constants.MAX_ERROR_COUNT];
+        correctCount = 0;
+        incorrectCount = 0;
     }
 
     // Update is called once per frame
