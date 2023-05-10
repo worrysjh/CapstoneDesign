@@ -16,30 +16,30 @@
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
 # Package -
-/NAZAKT/Packages/
-!/NAZAKT/Package/com.github.homuler.mediapipe/Runtime/Scripts/Unity/Annotation/
-/NAZAKT/Library/
-/NAZAKT/Logs/
-/NAZAKT/mediapipe_api/
-/NAZAKT/obj/
-/NAZAKT/ProjectSettings/
-/NAZAKT/test_BurstDebugInformation_DoNotShip/
-/NAZAKT/UserSettings/
-/NAZAKT/[docker]/
+NAZAKT/Packages
+!NAZAKT/Package/com.github.homuler.mediapipe/Runtime/Scripts/Unity/Annotation
+NAZAKT/Library
+NAZAKT/Logs
+NAZAKT/mediapipe_api
+NAZAKT/obj
+NAZAKT/ProjectSettings
+NAZAKT/test_BurstDebugInformation_DoNotShip
+NAZAKT/UserSettings
+NAZAKT/[docker]
 
-/NAZAKT/.vscode/
-/NAZAKT/.vs/
-/NAZAKT/.nuget/
-/NAZAKT/.github/
-/NAZAKT/.git/
+NAZAKT/.vscode
+NAZAKT/.vs
+NAZAKT/.nuget
+NAZAKT/.github
+NAZAKT/.git
 
-/NAZAKT/.bazelrc
-/NAZAKT/.bazelversion
-/NAZAKT/.clang-format
-/NAZAKT/.editorconfig
-/NAZAKT/.gitattributes
-/NAZAKT/.versionrc
-/NAZAKT/.vsconfig
+NAZAKT/.bazelrc
+NAZAKT/.bazelversion
+NAZAKT/.clang-format
+NAZAKT/.editorconfig
+NAZAKT/.gitattributes
+NAZAKT/.versionrc
+NAZAKT/.vsconfig
 
 # User-specific files
 *.rsuser
