@@ -16,6 +16,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
 # Package -
+/NAZAKT/third_party/
 /NAZAKT/Packages/
 !/NAZAKT/Package/com.github.homuler.mediapipe/Runtime/Scripts/Unity/Annotation/*.cs
 /NAZAKT/Library/
