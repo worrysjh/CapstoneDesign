@@ -59,8 +59,8 @@ public class TimerManager : MonoBehaviour
     }
 
     public void timerStopBtnOnclicked(){
-        min.text = "00";
-        sec.text = "00";
+        min.text = "--";
+        sec.text = "--";
 
         // 정지 버튼...
         Button stop = gameObject.GetComponent<Button>();

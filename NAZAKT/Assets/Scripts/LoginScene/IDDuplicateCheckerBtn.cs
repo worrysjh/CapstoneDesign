@@ -15,7 +15,7 @@ public class IDDuplicateCheckerBtn : MonoBehaviour
     string UserId = null;                        // 사용자가 입력한 ID
     TextMeshProUGUI AvailabilityTxt = null;      // 사용 가능 여부 TXT
 
-    public static MySqlConnection conn = new MySqlConnection("SERVER = 175.114.255.210; port = 3306; DATABASE = capstone; UID = tester; PWD = P@ssw0rd;");
+    public static MySqlConnection conn = new MySqlConnection("SERVER = 221.140.207.231; port = 3306; DATABASE = capstone; UID = tester; PWD = P@ssw0rd;");
 
 
     public void IDDuplicateCheckerBtnOnClicked(TMP_InputField ip){

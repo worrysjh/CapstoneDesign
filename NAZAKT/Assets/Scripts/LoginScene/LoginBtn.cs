@@ -16,7 +16,7 @@ public class LoginBtn : MonoBehaviour
     public TMP_InputField PWInput;
     public GameObject LoginFail;
 
-    public static MySqlConnection conn = new MySqlConnection("SERVER = 175.114.255.210; port = 3306; DATABASE = capstone; UID = tester; PWD = P@ssw0rd;");
+    public static MySqlConnection conn = new MySqlConnection("SERVER = 221.140.207.231; port = 3306; DATABASE = capstone; UID = tester; PWD = P@ssw0rd;");
 
     void Start()
     {
