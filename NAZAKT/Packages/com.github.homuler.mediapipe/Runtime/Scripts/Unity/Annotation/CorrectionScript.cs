@@ -80,6 +80,12 @@ namespace Mediapipe.Unity
             }
         }
 
+        // 상체가 앞으로 쏠렸는가 판단 함수
+        bool isUpperBodyLeaningForward(int left_angle, int right_angle){
+            
+            return true;
+        }
+
         void CheckPose(){
             if (target != null)
             {
@@ -106,6 +112,7 @@ namespace Mediapipe.Unity
                 */
 
                 float left_knee_angle, right_knee_angle;
+                float left_upper_body_angle, right_upper_body_angle; // left(12, 24), right(11, 23)
 
                 switch (currentState){
                     case 1:
