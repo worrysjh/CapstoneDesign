@@ -54,9 +54,13 @@ public class ErrorMessage : MonoBehaviour
     }
 
     public void restart() {
-        time = 0;
-        GetComponent<Image>().color = Color.white;
-        transform.Find("ErrMsgTxt").gameObject.GetComponent<TextMeshProUGUI>().color = Color.black;
+        if (time < 0.4f) {
+            return;
+        } else {
+            time = 0.4f;
+            GetComponent<Image>().color = Color.white;
+            transform.Find("ErrMsgTxt").gameObject.GetComponent<TextMeshProUGUI>().color = Color.black;
+        }
     }
 
     void Start()
@@ -67,7 +71,7 @@ public class ErrorMessage : MonoBehaviour
 
     void Update()
     {
-        if(time <= _upSizeTime*2){
+        if(time < _upSizeTime*2){
             Bounce();
         } else if(time >= _hold_time){
             FadeOut();

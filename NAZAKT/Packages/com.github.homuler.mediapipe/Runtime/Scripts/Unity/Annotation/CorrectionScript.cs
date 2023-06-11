@@ -11,6 +11,7 @@ namespace Mediapipe.Unity
         [SerializeField] private GameObject woInfo;
         [SerializeField] private GameObject connectionListAnnotation1;
         [SerializeField] private GameObject connectionListAnnotation2;
+        [SerializeField] private GameObject errMsgFrame;
         private float time;
         public LandmarkList target;
         private WOInfo info;
@@ -194,6 +195,7 @@ namespace Mediapipe.Unity
                         // Check shoulder feet angle
                         if (15 < shoulder_feet_angle){
                             // Debug.Log("Shoulder - Feet angle Wrong!!!");
+
                         }
 
                         // State2 -> State1
@@ -203,6 +205,7 @@ namespace Mediapipe.Unity
                         } else if ((left_knee_angle < 32) && (right_knee_angle < 32) && (isSquattingDown)){
                             // Incorrect Count up : cyclic from state s1 to s2 and again s1
                             currentState = 1;
+                            errMsgFrame.SendMessage("ShowError", 1);
                             info.increseIncorrectCount();
                             info.SetState(currentState);
                         }
@@ -231,18 +234,20 @@ namespace Mediapipe.Unity
                         // Check knee position
                         if (knees_groin_angle < feet_groin_angle){
                             Debug.Log("Knees position Wrong!!!");
+                            errMsgFrame.SendMessage("ShowError", 0);
                         }
 
                         // Check shoulder feet angle
                         if (15 < shoulder_feet_angle){
                             // Debug.Log("Shoulder - Feet angle Wrong!!!");
+                            
                         }
 
                         // Too deep Squat
                         if ((95 < left_knee_angle) || (95 < right_knee_angle)){
                             // Print "Too Deep Squat" Message
                             isDeepSquat = true;
-
+                            errMsgFrame.SendMessage("ShowError", 2);
                             ChangeToRed(30);
                             ChangeToRed(25);
                         }
