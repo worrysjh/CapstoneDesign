@@ -19,6 +19,7 @@ public class WOStartBtn : MonoBehaviour
     public TextMeshProUGUI WOnameTxt;
     public TMP_Dropdown setDrop;
     public TMP_Dropdown cntDrop;
+    public string userID;
 
     public WOStatus WOStatus;
 
@@ -62,6 +63,9 @@ public class WOStartBtn : MonoBehaviour
 
     // 운동 정보 세팅 메소드
     public void SetWOInfo(){
+        Debug.Log("ID : " + UserInfo.id);
+
+        WOStatus.userID = UserInfo.id;
         WOStatus.WOname = WOnameTxt.text;
         WOStatus.setNum = setDrop.value;
         WOStatus.cntNum = cntDrop.value;

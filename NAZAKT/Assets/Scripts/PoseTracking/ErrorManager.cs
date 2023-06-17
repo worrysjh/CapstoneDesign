@@ -61,7 +61,7 @@ public class ErrorManager : MonoBehaviour
                 break;
         }
 
-        ErrorMsgList[AvilableMsg(errorCode)].ShowMsg(errorCode, ERR[errorCode]);
+        ErrorMsgList[AvilableMsg(errorCode)].ShowMsg(errorCode, ERR[errorCode - 1]);
     }
     
     void Start()

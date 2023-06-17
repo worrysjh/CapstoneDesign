@@ -8,6 +8,8 @@ using TMPro;
 public class WOStatus : MonoBehaviour
 {
     public string WOname;
+    public string userID;
     public int setNum;
     public int cntNum;
+
 }

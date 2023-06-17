@@ -16,21 +16,77 @@ public class WOInfo : MonoBehaviour
     public int currentState;
     public int inccorectPoseCount;
     public int[] ErrorTime;
+
+    public int CntNum;              // 사용자가 설정한 카운트 수
+    public int SetNum;              // 사용자가 설정한 세트 수
+
+    public int curSetNum;           // 현재 세트 수
+    
+    public int countSum;            // 현재 카운트 수 (correctCount + incorrectCount)
     public int correctCount;
     public int incorrectCount;
+
+    public bool isStarted;
+
+    public GameObject TimerManager;             // 타이머
 
     public void SetState(int state){
         currentState = state;
     }
 
+    public bool checkSetDone() {
+        if(countSum >= CntNum) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     public void increaseCorrectCount(){
         correctCount++;
         Debug.Log("correctCount : " + correctCount.ToString());
+        
+        countSum++;
+
+        Debug.Log("countSum : " + countSum.ToString());
+
+        // 갯수 다 채웠는지 확인...
+        if(checkSetDone()){
+            TimerManager.SendMessage("timerStart");
+
+            // 정지
+            isStarted = false;
+
+            Debug.Log("Timer Starts!");
+        }
     }
 
     public void increseIncorrectCount(){
         incorrectCount++;
         Debug.Log("incorrectCount : " + incorrectCount.ToString());
+
+        countSum++;
+
+        // 갯수 다 채웠는지 확인...
+        if(checkSetDone()){
+            TimerManager.SendMessage("timerStart");
+
+            // 시작
+            isStarted = false;
+
+            Debug.Log("Timer Starts!");
+        }
+    }
+
+    // 세트 종료...
+    public void endOfSet(){
+        countSum = 0;
+        correctCount = 0;
+        incorrectCount = 0;
+        curSetNum++;
+
+        isStarted = true;
     }
 
     public void DecreaswErrorCount(){
@@ -66,6 +122,11 @@ public class WOInfo : MonoBehaviour
         ErrorTime = new int[Constants.MAX_ERROR_COUNT];
         correctCount = 0;
         incorrectCount = 0;
+        countSum = 0;
+
+        curSetNum = 1;
+        
+        isStarted = true;
     }
 
     // Update is called once per frame

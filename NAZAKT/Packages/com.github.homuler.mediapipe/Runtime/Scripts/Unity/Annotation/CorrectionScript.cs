@@ -17,9 +17,13 @@ namespace Mediapipe.Unity
         private WOInfo info;
         private ConnectionListAnnotation connectionList1;
         private ConnectionListAnnotation connectionList2;
-        private int currentState; // 1, 2, 3
+        private int currentState; // 1, 2, 3, 4
         private bool isSquattingDown;
         private bool isDeepSquat; // Deep Squats Flag
+
+        public void setCurrentState(int state){
+            currentState = state;
+        }
 
         // Start is called before the first frame update
         void Start()
@@ -89,7 +93,7 @@ namespace Mediapipe.Unity
                 VB = GetVector(num3) - GetVector(num2);
             }
             float angle = Vector3.Angle(VA, VB);
-            Debug.Log(angle);
+            //Debug.Log(angle);
             return angle;
         }
 
@@ -138,6 +142,11 @@ namespace Mediapipe.Unity
                 float feet_groin_angle, knees_groin_angle;
                 float shoulder_feet_angle;
 
+                // 세트 완료 체크
+                if(!info.GetComponent<WOInfo>().isStarted) {
+                    currentState = 4;
+                }
+
                 switch (currentState){
                     case 1:
                         left_knee_angle = CalcAngle(23, 25, -1); // Calculate left_knee_angle (vertical)
@@ -152,11 +161,13 @@ namespace Mediapipe.Unity
                         // Check knee position
                         if (knees_groin_angle < feet_groin_angle){
                             Debug.Log("Knees position Wrong!!!");
+                            errMsgFrame.SendMessage("ShowError", 1);
                         }
 
                         // Check shoulder feet angle
                         if (15 < shoulder_feet_angle){
                             // Debug.Log("Shoulder - Feet angle Wrong!!!");
+                            errMsgFrame.SendMessage("ShowError", 5);
                         }
 
                         // State1 -> State2
@@ -190,12 +201,13 @@ namespace Mediapipe.Unity
                         // Check knee position
                         if (knees_groin_angle < feet_groin_angle){
                             Debug.Log("Knees position Wrong!!!");
+                            errMsgFrame.SendMessage("ShowError", 1);
                         }
 
                         // Check shoulder feet angle
                         if (15 < shoulder_feet_angle){
                             // Debug.Log("Shoulder - Feet angle Wrong!!!");
-
+                            errMsgFrame.SendMessage("ShowError", 5);
                         }
 
                         // State2 -> State1
@@ -205,7 +217,7 @@ namespace Mediapipe.Unity
                         } else if ((left_knee_angle < 32) && (right_knee_angle < 32) && (isSquattingDown)){
                             // Incorrect Count up : cyclic from state s1 to s2 and again s1
                             currentState = 1;
-                            errMsgFrame.SendMessage("ShowError", 1);
+                            errMsgFrame.SendMessage("ShowError", 2);
                             info.increseIncorrectCount();
                             info.SetState(currentState);
                         }
@@ -234,20 +246,20 @@ namespace Mediapipe.Unity
                         // Check knee position
                         if (knees_groin_angle < feet_groin_angle){
                             Debug.Log("Knees position Wrong!!!");
-                            errMsgFrame.SendMessage("ShowError", 0);
+                            errMsgFrame.SendMessage("ShowError", 1);
                         }
 
                         // Check shoulder feet angle
                         if (15 < shoulder_feet_angle){
                             // Debug.Log("Shoulder - Feet angle Wrong!!!");
-                            
+                            errMsgFrame.SendMessage("ShowError", 5);
                         }
 
                         // Too deep Squat
                         if ((95 < left_knee_angle) || (95 < right_knee_angle)){
                             // Print "Too Deep Squat" Message
                             isDeepSquat = true;
-                            errMsgFrame.SendMessage("ShowError", 2);
+                            errMsgFrame.SendMessage("ShowError", 3);
                             ChangeToRed(30);
                             ChangeToRed(25);
                         }
@@ -257,6 +269,14 @@ namespace Mediapipe.Unity
                             ChangeToWhite(30);
                             ChangeToWhite(25);
                             currentState = 2;
+                            info.SetState(currentState);
+                        }
+                        break;
+
+                    case 4:         // 세트 휴식 시간일때
+                        info.SetState(currentState);
+                        if(info.GetComponent<WOInfo>().isStarted) {
+                            currentState = 1;
                             info.SetState(currentState);
                         }
                         break;

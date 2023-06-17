@@ -12,6 +12,9 @@ public class WorkOutManager : MonoBehaviour
 
     TextMeshProUGUI stateText;
     TextMeshProUGUI countText;
+    TextMeshProUGUI CurSet;
+    TextMeshProUGUI TargetSet;
+    TextMeshProUGUI TargetCnt;
 
     int curstate;
     int curCount;
@@ -21,6 +24,9 @@ public class WorkOutManager : MonoBehaviour
     {
         stateText = stateTxt.GetComponent<TextMeshProUGUI>();
         countText = countTxt.GetComponent<TextMeshProUGUI>();
+        TargetSet = GameObject.Find("TargetSet").GetComponent<TextMeshProUGUI>();
+        TargetCnt = GameObject.Find("TargetCnt").GetComponent<TextMeshProUGUI>();
+        CurSet = GameObject.Find("CurSet").GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -28,6 +34,8 @@ public class WorkOutManager : MonoBehaviour
     {
         setState();
         setCount();
+
+        setWOInfo();
     }
 
     void setState(){
@@ -38,5 +46,11 @@ public class WorkOutManager : MonoBehaviour
     void setCount(){
         curCount = WOInfomation.GetComponent<WOInfo>().correctCount + WOInfomation.GetComponent<WOInfo>().incorrectCount;
         countText.text = curCount.ToString();
+    }
+    
+    void setWOInfo(){
+        WOInfomation.GetComponent<WOInfo>().SetNum = int.Parse(TargetSet.text);
+        WOInfomation.GetComponent<WOInfo>().CntNum = int.Parse(TargetCnt.text);
+        CurSet.text = WOInfomation.GetComponent<WOInfo>().curSetNum.ToString();
     }
 }

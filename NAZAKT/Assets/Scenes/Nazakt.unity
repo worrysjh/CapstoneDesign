@@ -2105,7 +2105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c624612abcab411c8da692e7f8816be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modifyBtn: {fileID: 152573729}
 --- !u!1 &226151848
 GameObject:
   m_ObjectHideFlags: 0
@@ -7877,6 +7876,7 @@ MonoBehaviour:
   WOnameTxt: {fileID: 1112507996}
   setDrop: {fileID: 638110264}
   cntDrop: {fileID: 381817650}
+  userID: 
   WOStatus: {fileID: 1562411148}
 --- !u!1 &763673041
 GameObject:
@@ -13688,10 +13688,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1562411146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c4e9ec34745741c7a9773de561f03ea, type: 3}
+  m_Script: {fileID: 11500000, guid: b353edc8249ca478e96c80e81a9f23cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   WOname: 
+  userID: 
   setNum: 0
   cntNum: 0
 --- !u!1 &1582153469
