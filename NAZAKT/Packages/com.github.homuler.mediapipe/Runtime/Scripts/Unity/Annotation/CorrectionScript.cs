@@ -4,6 +4,11 @@ using UnityEngine;
 using System.Timers;
 using UnityEngine.UI;
 
+using MySql.Data;
+using MySql.Data.MySqlClient;
+using System.Data;
+using System;
+
 namespace Mediapipe.Unity
 {
     public class CorrectionScript : MonoBehaviour
@@ -21,6 +26,9 @@ namespace Mediapipe.Unity
         private bool isSquattingDown;
         private bool isDeepSquat; // Deep Squats Flag
 
+        public static MySqlConnection conn = new MySqlConnection("SERVER = 175.114.255.210; port = 3306; DATABASE = capstone; UID = tester; PWD = P@ssw0rd;");
+
+
         public void setCurrentState(int state){
             currentState = state;
         }
@@ -35,6 +43,19 @@ namespace Mediapipe.Unity
             connectionList1 = connectionListAnnotation1.GetComponent<ConnectionListAnnotation>();
             connectionList2 = connectionListAnnotation2.GetComponent<ConnectionListAnnotation>();
             info = woInfo.GetComponent<WOInfo>();
+        }
+
+        void savelog(string error)
+        {
+            try {
+                string loginsertquery = "insert into log_tb (user_id, wo_name, do_date, er_log) value
+                ();"
+
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(loginsertquery, conn);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
         }
 
         // Update is called once per frame
