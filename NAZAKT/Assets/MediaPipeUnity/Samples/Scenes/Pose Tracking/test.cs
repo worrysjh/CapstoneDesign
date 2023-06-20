@@ -30,4 +30,8 @@ public class test : MonoBehaviour
         TargetSet.text = "5";
         TargetCnt.text = "5";
     }
+
+    public void showWOResult(){
+        GameObject.Find("WOResultFrame").SetActive(true);
+    }
 }

@@ -21,6 +21,12 @@ public class SetWOTargetCnt : MonoBehaviour
 
     // WOStatus에 담긴 정보 가져오기...
     void setWOTargetCnt(){
+        // test
+        if(GameObject.Find("WOStatus") == null){ 
+            gameObject.GetComponent<TextMeshProUGUI>().text = "5";
+            return;
+        }
+
         WOStatus WOStatus = GameObject.Find("WOStatus").GetComponent<WOStatus>();
         gameObject.GetComponent<TextMeshProUGUI>().text = WOStatus.cntNum.ToString();
     }

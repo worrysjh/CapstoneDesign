@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
 using TMPro;
+
 
 using MySql.Data;
 using MySql.Data.MySqlClient;
@@ -15,14 +17,15 @@ public class WOStartBtn : MonoBehaviour
 {
     public static MySqlConnection conn = new MySqlConnection("SERVER = 175.114.255.210; port = 3306; DATABASE = capstone; UID = tester; PWD = P@ssw0rd;");
 
+
     public TextMeshProUGUI WOnameTxt;
     public TMP_Dropdown setDrop;
     public TMP_Dropdown cntDrop;
-    //public string userID;
-    
+    public string userID;
+
     public WOStatus WOStatus;
 
-    public string todate;
+
 
   // Start is called before the first frame update
   void Start()
@@ -37,21 +40,21 @@ public class WOStartBtn : MonoBehaviour
     }
 
     public void sceneChange(){
-        SetWOInfo();
-        DontDestroyOnLoad(WOStatus); // 운동 정보 담은 오브젝트 넘기기
-        todate = DateTime.Now.ToString(("yyyy-MM-dd HH:mm:ss"));
-
+        // SceneManager.LoadScene(0);
+        // SetWOInfo();
+        // DontDestroyOnLoad(WOStatus); // 운동 정보 담은 오브젝트 넘기기
+        
         try {
-            string startwoquery = "insert into user_tb (user_id, wo_name, set_set, set_count, do_set, do_count, do_date) value (WOStatus.userId, WOStatus.WOname, WOStatus.setNum, WOStatus.cntNum, 0, 0, todate);";
+            SetWOInfo();
+            string startwoquery = "insert into user_wo(user_id, wo_name, set_set, set_count, do_set, do_count, do_date) value ('test', 'squat', 0, 0, 0, 0, '" + WOStatus.date + "');";
             Debug.Log(startwoquery);
 
             conn.Open();
             MySqlCommand cmd = new MySqlCommand(startwoquery, conn);
             cmd.ExecuteNonQuery();
-            //SceneManager.LoadScene(0);
-            //SetWOInfo();
-            //DontDestroyOnLoad(WOStatus); // 운동 정보 담은 오브젝트 넘기기
             SceneManager.LoadScene(0);
+           
+            DontDestroyOnLoad(WOStatus); // 운동 정보 담은 오브젝트 넘기기
             conn.Close();
         }
         catch (Exception ex) { 
@@ -67,7 +70,8 @@ public class WOStartBtn : MonoBehaviour
         WOStatus.WOname = WOnameTxt.text;
         WOStatus.setNum = setDrop.value;
         WOStatus.cntNum = cntDrop.value;
-        WOStatus.date = todate;
+        WOStatus.date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
 
         // Debug.Log("운동명 : " + WOStatus.WOname);
         // Debug.Log("세트 수 : " + WOStatus.setNum);

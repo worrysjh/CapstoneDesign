@@ -21,6 +21,13 @@ public class SetWONameTxt : MonoBehaviour
 
     // WOStatus에 담긴 정보 가져오기... 
     void setWONameTxt(){
+
+        // test
+        if(GameObject.Find("WOStatus") == null){ 
+            gameObject.GetComponent<TextMeshProUGUI>().text = "dubug";
+            return;
+        }
+
         WOStatus WOStatus = GameObject.Find("WOStatus").GetComponent<WOStatus>();
         gameObject.GetComponent<TextMeshProUGUI>().text = WOStatus.WOname;
     }

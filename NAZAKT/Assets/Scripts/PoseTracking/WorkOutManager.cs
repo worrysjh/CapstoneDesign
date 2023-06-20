@@ -9,6 +9,7 @@ public class WorkOutManager : MonoBehaviour
     [SerializeField] private GameObject WOInfomation;
     [SerializeField] private GameObject stateTxt;
     [SerializeField] private GameObject countTxt;
+    [SerializeField] private GameObject WOResultFrame;
 
     TextMeshProUGUI stateText;
     TextMeshProUGUI countText;
@@ -36,6 +37,8 @@ public class WorkOutManager : MonoBehaviour
         setCount();
 
         setWOInfo();
+        
+        checkEnd();
     }
 
     void setState(){
@@ -52,5 +55,11 @@ public class WorkOutManager : MonoBehaviour
         WOInfomation.GetComponent<WOInfo>().SetNum = int.Parse(TargetSet.text);
         WOInfomation.GetComponent<WOInfo>().CntNum = int.Parse(TargetCnt.text);
         CurSet.text = WOInfomation.GetComponent<WOInfo>().curSetNum.ToString();
+    }
+
+    void checkEnd(){
+        if(int.Parse(TargetSet.text) < int.Parse(CurSet.text)){
+            WOResultFrame.SetActive(true);
+        }
     }
 }
