@@ -17,31 +17,7 @@ public class WOResult : MonoBehaviour
 
     public static MySqlConnection conn = new MySqlConnection("SERVER = 175.114.255.210; port = 3306; DATABASE = capstone; UID = tester; PWD = P@ssw0rd;");
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-        // 운동 이름
-        gameObject.transform.Find("WONameTxt").GetComponent<TextMeshProUGUI>().text = GameObject.Find("WONameTxt").GetComponent<TextMeshProUGUI>().text;
-
-        // 목표 세트 수...
-        gameObject.transform.Find("WOSetTxt").GetComponent<TextMeshProUGUI>().text = GameObject.Find("TargetSet").GetComponent<TextMeshProUGUI>().text;
-
-        // 목표 카운트 수...
-        gameObject.transform.Find("WOCntTxt").GetComponent<TextMeshProUGUI>().text = (int.Parse(GameObject.Find("TargetSet").GetComponent<TextMeshProUGUI>().text) * int.Parse(GameObject.Find("TargetCnt").GetComponent<TextMeshProUGUI>().text)).ToString();
-        
-        // 수행 세트 수...
-        gameObject.transform.Find("WODoSetCntTxt").GetComponent<TextMeshProUGUI>().text = (int.Parse(GameObject.Find("CurSet").GetComponent<TextMeshProUGUI>().text) - 1).ToString();
-        
-        // 수행 카운트 수...
-        gameObject.transform.Find("WODoCntTxt").GetComponent<TextMeshProUGUI>().text = ((int.Parse(GameObject.Find("CurSet").GetComponent<TextMeshProUGUI>().text) - 1) * int.Parse(GameObject.Find("TargetCnt").GetComponent<TextMeshProUGUI>().text) + int.Parse(GameObject.Find("CurCnt").GetComponent<TextMeshProUGUI>().text)).ToString();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public GameObject woinfo;
 
     public void homeBtnisClicked(){
         WOStatus WOStatus = GameObject.Find("WOStatus").GetComponent<WOStatus>();
@@ -60,8 +36,37 @@ public class WOResult : MonoBehaviour
         catch (Exception ex) { 
             Debug.Log(ex.ToString());
         }
-
-        // SceneManager.LoadScene("Scenes/Nazakt", LoadSceneMode.Single);
-        // Application.Quit();
     }
+
+    void init(){
+        // 운동 이름
+        gameObject.transform.Find("WONameTxt").GetComponent<TextMeshProUGUI>().text = GameObject.Find("WONameTxt").GetComponent<TextMeshProUGUI>().text;
+
+        // 목표 세트 수...
+        gameObject.transform.Find("WOSetTxt").GetComponent<TextMeshProUGUI>().text = GameObject.Find("TargetSet").GetComponent<TextMeshProUGUI>().text;
+
+        // 목표 카운트 수...
+        gameObject.transform.Find("WOCntTxt").GetComponent<TextMeshProUGUI>().text = (int.Parse(GameObject.Find("TargetSet").GetComponent<TextMeshProUGUI>().text) * int.Parse(GameObject.Find("TargetCnt").GetComponent<TextMeshProUGUI>().text)).ToString();
+        
+        // 수행 세트 수...
+        gameObject.transform.Find("WODoSetCntTxt").GetComponent<TextMeshProUGUI>().text = (int.Parse(GameObject.Find("CurSet").GetComponent<TextMeshProUGUI>().text) - 1).ToString();
+        
+        // 수행 카운트 수...
+        gameObject.transform.Find("WODoCntTxt").GetComponent<TextMeshProUGUI>().text = ((int.Parse(GameObject.Find("CurSet").GetComponent<TextMeshProUGUI>().text) - 1) * int.Parse(GameObject.Find("TargetCnt").GetComponent<TextMeshProUGUI>().text) + int.Parse(GameObject.Find("CurCnt").GetComponent<TextMeshProUGUI>().text)).ToString();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        woinfo.SendMessage("isEnd");
+        init();   
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    
 }

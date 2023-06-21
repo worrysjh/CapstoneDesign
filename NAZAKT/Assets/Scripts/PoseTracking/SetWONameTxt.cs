@@ -24,7 +24,7 @@ public class SetWONameTxt : MonoBehaviour
 
         // test
         if(GameObject.Find("WOStatus") == null){ 
-            gameObject.GetComponent<TextMeshProUGUI>().text = "dubug";
+            gameObject.GetComponent<TextMeshProUGUI>().text = "debug";
             return;
         }
 

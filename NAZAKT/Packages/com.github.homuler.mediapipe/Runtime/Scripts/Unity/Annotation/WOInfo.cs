@@ -115,6 +115,11 @@ public class WOInfo : MonoBehaviour
         }
     }
 
+    // 운동 종료
+    public void isEnd(){
+        isStarted = false;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
