@@ -8,15 +8,8 @@ using UnityEngine.EventSystems;
 using TMPro;
 
 
-using MySql.Data;
-using MySql.Data.MySqlClient;
-using System.Data;
-using System;
-
 public class WOStartBtn : MonoBehaviour
 {
-    public static MySqlConnection conn = new MySqlConnection("SERVER = 175.114.255.210; port = 3306; DATABASE = capstone; UID = tester; PWD = P@ssw0rd;");
-
 
     public TextMeshProUGUI WOnameTxt;
     public TMP_Dropdown setDrop;
@@ -40,26 +33,9 @@ public class WOStartBtn : MonoBehaviour
     }
 
     public void sceneChange(){
-        // SceneManager.LoadScene(0);
-        // SetWOInfo();
-        // DontDestroyOnLoad(WOStatus); // 운동 정보 담은 오브젝트 넘기기
-        
-        try {
-            SetWOInfo();
-            string startwoquery = "insert into user_wo(user_id, wo_name, set_set, set_count, do_set, do_count, do_date) value ('test', 'squat', 0, 0, 0, 0, '" + WOStatus.date + "');";
-            Debug.Log(startwoquery);
-
-            conn.Open();
-            MySqlCommand cmd = new MySqlCommand(startwoquery, conn);
-            cmd.ExecuteNonQuery();
-            SceneManager.LoadScene(0);
-           
-            DontDestroyOnLoad(WOStatus); // 운동 정보 담은 오브젝트 넘기기
-            conn.Close();
-        }
-        catch (Exception ex) { 
-            Debug.Log(ex.ToString());
-        }
+        SceneManager.LoadScene(0);
+        SetWOInfo();
+        DontDestroyOnLoad(WOStatus); // 운동 정보 담은 오브젝트 넘기기
     }
 
     // 운동 정보 세팅 메소드

@@ -19,7 +19,7 @@ public class ExerciseExplainer : MonoBehaviour
     void Start()
     {   
         index = 0;
-        sprites = Resources.LoadAll<Sprite>("Img/WOImg");
+        sprites = Resources.LoadAll<Sprite>("Img/WOImg/squat");
         initExplain();
         img.GetComponent<Image>().sprite = sprites[index];
         txt.GetComponent<TextMeshProUGUI>().text = explain[index];
