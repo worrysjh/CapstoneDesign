@@ -139,7 +139,8 @@ namespace Mediapipe.Unity
                 */
 
                 float left_knee_angle, right_knee_angle;
-                float feet_groin_angle, knees_groin_angle;
+                // float feet_groin_angle, knees_groin_angle;
+                float left_knee_feet_angle, right_knee_feet_angle;
                 float shoulder_feet_angle;
 
                 // 세트 완료 체크
@@ -153,21 +154,39 @@ namespace Mediapipe.Unity
                         right_knee_angle = CalcAngle(24, 26, -1); // Calculate right_knee_angle (vertical)
                         info.currentState = 1;
 
-                        feet_groin_angle = CalcAngle(27, 23, 24, 28);
-                        knees_groin_angle = CalcAngle(25, 23, 24, 26);
+                        // feet_groin_angle = CalcAngle(27, 23, 24, 28);
+                        // knees_groin_angle = CalcAngle(25, 23, 24, 26);
+
+                        // check knee - feet angle
+                        left_knee_feet_angle = CalcAngle(25, 27, -1);
+                        right_knee_feet_angle = CalcAngle(26, 28, -1);
 
                         shoulder_feet_angle = CalcAngle(11, 12, 27, 28, -1);
 
-                        // Check knee position
-                        if (knees_groin_angle < feet_groin_angle){
-                            Debug.Log("Knees position Wrong!!!");
+                        // check knee - feet angle
+                        if (45 < left_knee_feet_angle || 45 < right_knee_feet_angle) {
+                            Debug.Log("Knee falling over toes");
                             errMsgFrame.SendMessage("ShowError", 1);
+                            ChangeToRed(26);
+                            ChangeToRed(31);
+                        } else {
+                            ChangeToWhite(26);
+                            ChangeToWhite(31);
                         }
 
                         // Check shoulder feet angle
-                        if (15 < shoulder_feet_angle){
+                        if (20 < shoulder_feet_angle){
                             // Debug.Log("Shoulder - Feet angle Wrong!!!");
                             errMsgFrame.SendMessage("ShowError", 5);
+                            ChangeToRed(21);
+                            ChangeToRed(22);
+                            ChangeToRed(23);
+                            ChangeToRed(24);
+                        } else {
+                            ChangeToWhite(21);
+                            ChangeToWhite(22);
+                            ChangeToWhite(23);
+                            ChangeToWhite(24);
                         }
 
                         // State1 -> State2
@@ -193,21 +212,36 @@ namespace Mediapipe.Unity
                         left_knee_angle = CalcAngle(23, 25, -1); // Calculate left_knee_angle (vertical)
                         right_knee_angle = CalcAngle(24, 26, -1); // Calculate right_knee_angle (vertical)
 
-                        feet_groin_angle = CalcAngle(27, 23, 24, 28);
-                        knees_groin_angle = CalcAngle(25, 23, 24, 26);
+                        // check knee - feet angle
+                        left_knee_feet_angle = CalcAngle(25, 27, -1);
+                        right_knee_feet_angle = CalcAngle(26, 28, -1);
 
                         shoulder_feet_angle = CalcAngle(11, 12, 27, 28, -1);
-                        
-                        // Check knee position
-                        if (knees_groin_angle < feet_groin_angle){
-                            Debug.Log("Knees position Wrong!!!");
+
+                        // check knee - feet angle
+                        if (45 < left_knee_feet_angle || 45 < right_knee_feet_angle) {
+                            Debug.Log("Knee falling over toes");
                             errMsgFrame.SendMessage("ShowError", 1);
+                            ChangeToRed(26);
+                            ChangeToRed(31);
+                        } else {
+                            ChangeToWhite(26);
+                            ChangeToWhite(31);
                         }
 
                         // Check shoulder feet angle
-                        if (15 < shoulder_feet_angle){
+                        if (20 < shoulder_feet_angle){
                             // Debug.Log("Shoulder - Feet angle Wrong!!!");
                             errMsgFrame.SendMessage("ShowError", 5);
+                            ChangeToRed(21);
+                            ChangeToRed(22);
+                            ChangeToRed(23);
+                            ChangeToRed(24);
+                        } else {
+                            ChangeToWhite(21);
+                            ChangeToWhite(22);
+                            ChangeToWhite(23);
+                            ChangeToWhite(24);
                         }
 
                         // State2 -> State1
@@ -238,21 +272,36 @@ namespace Mediapipe.Unity
                         left_knee_angle = CalcAngle(23, 25, -1); // Calculate left_knee_angle (vertical)
                         right_knee_angle = CalcAngle(24, 26, -1); // Calculate right_knee_angle (vertical)
 
-                        feet_groin_angle = CalcAngle(27, 23, 24, 28);
-                        knees_groin_angle = CalcAngle(25, 23, 24, 26);
-                        
+                        // check knee - feet angle
+                        left_knee_feet_angle = CalcAngle(25, 27, -1);
+                        right_knee_feet_angle = CalcAngle(26, 28, -1);
+
                         shoulder_feet_angle = CalcAngle(11, 12, 27, 28, -1);
 
-                        // Check knee position
-                        if (knees_groin_angle < feet_groin_angle){
-                            Debug.Log("Knees position Wrong!!!");
+                        // check knee - feet angle
+                        if (45 < left_knee_feet_angle || 45 < right_knee_feet_angle) {
+                            Debug.Log("Knee falling over toes");
                             errMsgFrame.SendMessage("ShowError", 1);
+                            ChangeToRed(26);
+                            ChangeToRed(31);
+                        } else {
+                            ChangeToWhite(26);
+                            ChangeToWhite(31);
                         }
 
                         // Check shoulder feet angle
-                        if (15 < shoulder_feet_angle){
+                        if (20 < shoulder_feet_angle){
                             // Debug.Log("Shoulder - Feet angle Wrong!!!");
                             errMsgFrame.SendMessage("ShowError", 5);
+                            ChangeToRed(21);
+                            ChangeToRed(22);
+                            ChangeToRed(23);
+                            ChangeToRed(24);
+                        } else {
+                            ChangeToWhite(21);
+                            ChangeToWhite(22);
+                            ChangeToWhite(23);
+                            ChangeToWhite(24);
                         }
 
                         // Too deep Squat

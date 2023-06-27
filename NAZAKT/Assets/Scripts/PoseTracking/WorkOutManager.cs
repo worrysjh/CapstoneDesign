@@ -57,8 +57,19 @@ public class WorkOutManager : MonoBehaviour
         CurSet.text = WOInfomation.GetComponent<WOInfo>().curSetNum.ToString();
     }
 
+    // 정자세 총 횟수 설정
+    void setCorectCnt(int cnt){
+        transform.Find("Corect").GetComponent<TextMeshProUGUI>().text = "" + cnt;
+    }
+
+
+    void setInCorectCnt(int cnt){
+        transform.Find("InCorect").GetComponent<TextMeshProUGUI>().text = "" + cnt;
+    }
+
     void checkEnd(){
-        if(int.Parse(TargetSet.text) < int.Parse(CurSet.text)){
+        if(int.Parse(TargetSet.text) <= int.Parse(CurSet.text)){
+            
             WOResultFrame.SetActive(true);
         }
     }

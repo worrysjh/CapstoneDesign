@@ -95,6 +95,7 @@ public class FlatCalendar : MonoBehaviour {
 		public void print()
 		{
 			Debug.Log("Year:"+year+" Month:"+month+" Day:"+day+" Day of Week:"+dayOfWeek);
+
 		}
 	}
 
@@ -110,7 +111,6 @@ public class FlatCalendar : MonoBehaviour {
 	GameObject label_dayOfWeek;
 	GameObject label_dayNumber;
 	GameObject label_numberEvents;
-
 
 	/**
 	 * Current Time 
@@ -505,7 +505,13 @@ public class FlatCalendar : MonoBehaviour {
 	{
 		label_numberEvents.GetComponent<Text>().text = "" + getEventList(year,month,day).Count;
 	}
+
+	public void setEventNum(int num)
+	{
+		label_numberEvents.GetComponent<Text>().text = "" + num;
+	}
 	
+
 
 	// ================================================
 	// =============== BUTTON LISTENERS ===============

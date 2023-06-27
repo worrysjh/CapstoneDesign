@@ -28,6 +28,10 @@ public class FlatCalendar_Demo : MonoBehaviour {
 	// Declare FlatCalendar
 	FlatCalendar flatCalendar;
 
+	// LogLoader
+	GameObject LogLoader;
+
+
 	// Use this for initialization
 	void Start () {
 
@@ -42,6 +46,7 @@ public class FlatCalendar_Demo : MonoBehaviour {
 	public void startCalendar(){
 		// Get Flat Calendar Instance
 		flatCalendar = GameObject.Find("FlatCalendar").GetComponent<FlatCalendar>();
+		LogLoader = GameObject.Find("LogLoader");
 
 		// Initialize Flat Calendar
 		flatCalendar.initFlatCalendar();
@@ -63,6 +68,11 @@ public class FlatCalendar_Demo : MonoBehaviour {
 	{
 		Debug.Log("Day has changed");
 		time.print();
+
+		//getLogByDate("2023-06-23");
+		LogLoader.SendMessage("getLogByDate", time.year + "-" + time.month + "-" + time.day);
+		Debug.Log(time.year + "-" + time.month + "-" + time.day);
+
 	}
 
 	public void monthUpdated(FlatCalendar.TimeObj time)

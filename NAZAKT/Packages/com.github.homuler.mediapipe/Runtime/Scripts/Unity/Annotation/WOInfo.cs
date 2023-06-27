@@ -26,9 +26,14 @@ public class WOInfo : MonoBehaviour
     public int correctCount;
     public int incorrectCount;
 
+    public int totalCorrectCount;
+    public int totalIncorrectCount;
+
     public bool isStarted;
 
     public GameObject TimerManager;             // 타이머
+    GameObject woManager;             // 타이머
+
 
     public void SetState(int state){
         currentState = state;
@@ -51,6 +56,9 @@ public class WOInfo : MonoBehaviour
 
         Debug.Log("countSum : " + countSum.ToString());
 
+        totalCorrectCount++;
+        woManager.SendMessage("setCorectCnt", totalCorrectCount);
+
         // 갯수 다 채웠는지 확인...
         if(checkSetDone()){
             TimerManager.SendMessage("timerStart");
@@ -67,6 +75,9 @@ public class WOInfo : MonoBehaviour
         Debug.Log("incorrectCount : " + incorrectCount.ToString());
 
         countSum++;
+
+        totalIncorrectCount++;
+        woManager.SendMessage("setInCorectCnt", totalIncorrectCount);
 
         // 갯수 다 채웠는지 확인...
         if(checkSetDone()){
@@ -123,13 +134,18 @@ public class WOInfo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        woManager = GameObject.Find("WorkoutManager");
+
         time = 1f;
         ErrorTime = new int[Constants.MAX_ERROR_COUNT];
         correctCount = 0;
         incorrectCount = 0;
         countSum = 0;
 
-        curSetNum = 1;
+        curSetNum = 0;
+
+        totalCorrectCount = 0;
+        totalIncorrectCount = 0;
         
         isStarted = true;
     }

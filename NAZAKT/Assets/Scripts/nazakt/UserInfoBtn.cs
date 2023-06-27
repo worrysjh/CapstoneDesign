@@ -28,6 +28,14 @@ public class UserInfoBtn : MonoBehaviour
         TMP_InputField heightInput = GameObject.Find("HeightInput").GetComponent<TMP_InputField>(); // 키 input 필드
 
 
+
+        // test
+        if(UserInfo.id == ""){
+            UserInfo.id = "test";
+            Debug.Log("id: " + UserInfo.id);
+        }
+        //
+
         // UserInfoFrame의 속성 변경
         idInput.text = UserInfo.id;
 

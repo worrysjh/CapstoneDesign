@@ -44,8 +44,8 @@ public class WOStartBtn : MonoBehaviour
 
         WOStatus.userID = UserInfo.id;
         WOStatus.WOname = WOnameTxt.text;
-        WOStatus.setNum = setDrop.value;
-        WOStatus.cntNum = cntDrop.value;
+        WOStatus.setNum = setDrop.value + 1;
+        WOStatus.cntNum = cntDrop.value + 1;
         WOStatus.date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
 

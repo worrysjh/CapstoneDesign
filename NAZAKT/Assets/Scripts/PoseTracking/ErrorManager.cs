@@ -5,12 +5,12 @@ using UnityEngine;
 public class ErrorManager : MonoBehaviour
 {
     // error message 
-    private string[] ERR = {
+    public string[] ERR = {
         "무릎이 발 너머로 나감",
         "너무 살짝 앉음",
         "너무 깊게 앉음",
         "에러4",
-        "에러5"
+        "무게중심 틀어짐"
         };
 
     [SerializeField] private GameObject ErrMsg1;
@@ -19,7 +19,7 @@ public class ErrorManager : MonoBehaviour
     [SerializeField] private GameObject ErrMsg4;
 
     private ErrorMessage[] ErrorMsgList;
-    int[] msgField = new int[4];
+    public bool[] errorFlagList;
 
     bool isShowing(int errorCode) {
         for (int i = 0; i < ErrorMsgList.Length; i++) {
@@ -41,6 +41,7 @@ public class ErrorManager : MonoBehaviour
     }
 
     public void ShowError(int errorCode) {
+        errorFlagList[errorCode - 1] = true;
 
         if (isShowing(errorCode)) {
             return;
@@ -66,6 +67,9 @@ public class ErrorManager : MonoBehaviour
     
     void Start()
     {
+        // initialize error flags
+        errorFlagList = new bool[ERR.Length];
+
         // connect ErrorMessage gameobject
         ErrorMsgList = new ErrorMessage[4];
         ErrorMsgList[0] = ErrMsg1.GetComponent<ErrorMessage>();

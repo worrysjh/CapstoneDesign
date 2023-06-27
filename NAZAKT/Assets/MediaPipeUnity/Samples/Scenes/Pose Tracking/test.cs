@@ -26,6 +26,10 @@ public class test : MonoBehaviour
         cnt.SendMessage("increaseCorrectCount");
     }
 
+    public void incntUp(){
+        cnt.SendMessage("increseIncorrectCount");
+    }
+
     public void initAll(){
         TargetSet.text = "5";
         TargetCnt.text = "5";

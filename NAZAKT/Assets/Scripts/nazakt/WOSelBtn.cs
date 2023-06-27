@@ -41,7 +41,9 @@ public class WOSelBtn : MonoBehaviour
         
         // WOInfoPanel 정보 변경
         woNameTxt.GetComponent<TextMeshProUGUI>().text = woName;
-        WOInfoTxt.GetComponent<TextMeshProUGUI>().text = woName + "에 대한 설명";
+        if(woName == "Squat"){
+            WOInfoTxt.GetComponent<TextMeshProUGUI>().text = "발을 어깨너비로 벌린 후 허벅지가 수평이 될 때까지 여러 번 앉았다 일어나는 것으로, 엉덩이·허벅지 등 하체 근육 단련에 도움이 된다.";
+        } else WOInfoTxt.GetComponent<TextMeshProUGUI>().text = woName + "에 대한 설명";
         woImg.GetComponent<Image>().sprite = woReimg;
     }
 }

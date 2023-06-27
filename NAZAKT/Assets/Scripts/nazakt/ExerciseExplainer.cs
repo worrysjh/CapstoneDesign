@@ -43,14 +43,11 @@ public class ExerciseExplainer : MonoBehaviour
         transform.Find("Explaintext").GetComponent<TextMeshProUGUI>().text =  WOName.GetComponent<TextMeshProUGUI>().text + " 설명";
        
         // 운동 설명 초기화
-        explain = new string[sprites.Length];
-        for(int i = 0; i < sprites.Length; i++){
-            if(i == sprites.Length - 1){
-                explain[i] = "마지막 페이지" ;
-                break;
-            }
-            explain[i] = (i + 1) + "페이지" ;
-        }
+        explain = new string[] {
+            "내려가기 전 완전히 일어난 상태",
+            "내려가는 도중의 상태(완전히 앉은 상태가 아님)",
+            "충분히 내려가 다시 올라가기 직전의 상태"
+        };
     }
 
     // 오른쪽 버튼 눌렀을 시
