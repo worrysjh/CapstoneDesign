@@ -20,12 +20,14 @@ public class Menu : MonoBehaviour
         
         GameObject obj = btnList[num];
 
-        obj.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().fontSize = 58;
+        obj.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().fontSize = 45;
+        obj.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Bold;
 
         for(int i = 0; i < btnList.Count; i++){
             if(i == num) continue;
             else{
-                btnList[i].transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().fontSize = 50;
+                btnList[i].transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().fontSize = 40;
+                btnList[i].transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
             }
         }
     }

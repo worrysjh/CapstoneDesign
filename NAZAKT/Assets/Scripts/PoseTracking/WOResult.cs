@@ -35,11 +35,11 @@ public class WOResult : MonoBehaviour
 
             conn.Close();
             Debug.Log("성공");
-
         }
         catch (Exception ex) { 
             Debug.Log(ex.ToString());
         }
+        SceneManager.LoadScene("Nazakt");
     }
 
     void init(){
@@ -55,7 +55,7 @@ public class WOResult : MonoBehaviour
         gameObject.transform.Find("WOCntTxt").GetComponent<TextMeshProUGUI>().text = (int.Parse(GameObject.Find("TargetSet").GetComponent<TextMeshProUGUI>().text) * int.Parse(GameObject.Find("TargetCnt").GetComponent<TextMeshProUGUI>().text)).ToString();
         
         // 수행 세트 수...
-        gameObject.transform.Find("WODoSetCntTxt").GetComponent<TextMeshProUGUI>().text = (int.Parse(GameObject.Find("CurSet").GetComponent<TextMeshProUGUI>().text)).ToString();
+        gameObject.transform.Find("WODoSetCntTxt").GetComponent<TextMeshProUGUI>().text = (int.Parse(GameObject.Find("CurSet").GetComponent<TextMeshProUGUI>().text) + 1).ToString();
         
         // 수행 카운트 수...
         gameObject.transform.Find("WODoCntTxt").GetComponent<TextMeshProUGUI>().text = ((int.Parse(GameObject.Find("CurSet").GetComponent<TextMeshProUGUI>().text)) * int.Parse(GameObject.Find("TargetCnt").GetComponent<TextMeshProUGUI>().text) + int.Parse(GameObject.Find("CurCnt").GetComponent<TextMeshProUGUI>().text)).ToString();
