@@ -10,7 +10,18 @@
 | :---: | :---: | :---: |
 | [신지헌](https://github.com/worrysjh) | [신동우](https://github.com/socra167) | [주찬영](https://github.com/dannyjoo7) |
 
+# 🏃‍♂️ 운동 진행
+| <img width="1640" alt="운동 선택" src="https://github.com/worrysjh/CapstoneDesign/assets/58596222/efce4a13-2a33-4d5b-93c2-fd845a8d56cb"> | <img width="1592" alt="운동 기록" src="https://github.com/worrysjh/CapstoneDesign/assets/58596222/9d5d9acf-5d41-4dd6-b281-47e69abb185d"> |
+| :---: | :---: |
+| 운동 선택 | 운동 기록 |
+
 # 🏋️‍♀️ 자세 교정
+| <img width="1639" alt="정상 운동 상태" src="https://github.com/worrysjh/CapstoneDesign/assets/58596222/1b031e2d-45e0-4e8b-8cf3-ea0cda642874"> | <img width="1637" alt="비정상 운동 상태" src="https://github.com/worrysjh/CapstoneDesign/assets/58596222/e6888778-7ce4-42bb-9400-3b41b20910eb"> |
+| :---: | :---: |
+| 올바른 자세 | 잘못된 자세 |
+
+> 자세가 잘못될 경우, 좌측에 **틀린 이유**를 알려주고 **틀린 부위**를 적색으로 보여줍니다.
+
 ### 정상 스쿼트
 ![정상스쿼트](https://github.com/worrysjh/CapstoneDesign/assets/58596222/0bb92193-cde2-4657-a8d7-de4fc5b9b934)
 
@@ -28,3 +39,4 @@
 
 ### 운동 결과 (모든 세트 완료 시)
 ![운동결과](https://github.com/worrysjh/CapstoneDesign/assets/58596222/c49ee31e-24ea-4fc2-9378-6997ff3326ac)
+
