@@ -2,7 +2,7 @@
 > Real Time Tracking Workout assitant with MediaPipe
 
 사용자의 운동 자세를 실시간 3D 모델로 보여주고, 틀린 자세를 교정해 올바른 트레이닝을 지원하는 서비스입니다.
-
+<br>
 [Google Mediapipe](https://github.com/google/mediapipe) Pose Estimation을 활용해 별도의 웨어러블 장치 없이 자세를 교정받을 수 있습니다.
 
 # 🧑‍💻 팀원 소개
